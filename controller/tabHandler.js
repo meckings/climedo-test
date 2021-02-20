@@ -63,8 +63,37 @@ const getAllTabs = (req, res)=>{
         });
 }
 
+const updateTab = (req, res)=>{
+    const id = req.params.id;
+    const body = req.body;
+    console.log("update tab", id);
+    Tab.updateOne({"_id": id}, body)
+        .then(result=>{
+            if(result==null){
+                const body = 
+                {
+                    message: "The tab you trying to update does not exist!",
+                }
+                console.log(err);
+                res.status(statusCodes.NOT_FOUND).json(body);
+            }
+            console.log("Tab updated!", result);
+            res.status(statusCodes.UPDATED).json();
+        })
+        .catch(err=>{
+            const body = 
+            {
+                message: "There was an error in processing your request, please review and send again.",
+                error: err._message
+            }
+            console.log(err);
+            res.status(statusCodes.BAD_REQUEST).json(body);
+        });
+}
+
 module.exports ={
     createTab,
     getTabById,
-    getAllTabs
+    getAllTabs,
+    updateTab
 }
