@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
+const tabRouter = require("./controller/router/tabRouter");
 
 const app = express();
 const dbUrl = process.env.DB_URL;
@@ -14,3 +15,6 @@ mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true})
             });
         })
         .catch(err=>console.log(err));
+
+app.use(express.json());
+app.use("/tab", tabRouter);
