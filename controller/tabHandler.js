@@ -91,9 +91,37 @@ const updateTab = (req, res)=>{
         });
 }
 
+const deleteTab = (req, res)=>{
+    const id = req.params.id;
+    console.log("delete tab", id);
+    Tab.deleteOne({"_id": id})
+        .then(result=>{
+            if(result==null){
+                const body = 
+                {
+                    message: "The tab you trying to delete does not exist!",
+                }
+                console.log(err);
+                res.status(statusCodes.NOT_FOUND).json(body);
+            }
+            console.log("Tab updated!", result);
+            res.status(statusCodes.OK).json({message: "Tab deleted successfully."});
+        })
+        .catch(err=>{
+            const body = 
+            {
+                message: "There was an error in processing your request, please review and send again.",
+                error: err._message
+            }
+            console.log(err);
+            res.status(statusCodes.BAD_REQUEST).json(body);
+        });
+}
+
 module.exports ={
     createTab,
     getTabById,
     getAllTabs,
-    updateTab
+    updateTab,
+    deleteTab
 }

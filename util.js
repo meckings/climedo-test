@@ -1,5 +1,5 @@
 const httpStatusCode = {
-    SUCCESS: 200,
+    OK: 200,
     CREATED: 201,
     UPDATED: 204,
     BAD_REQUEST: 400,
