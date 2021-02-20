@@ -45,7 +45,26 @@ const getTabById = (req, res)=>{
         });
 }
 
+const getAllTabs = (req, res)=>{
+    console.log("get all tabs");
+    Tab.find()
+        .then(result=>{
+            console.log("Tabs found!", result);
+            res.json(result);
+        })
+        .catch(err=>{
+            const body = 
+            {
+                message: "There was an error in processing your request, please review and send again.",
+                error: err._message
+            }
+            console.log(err.error);
+            res.status(statusCodes.BAD_REQUEST).json(body);
+        });
+}
+
 module.exports ={
     createTab,
-    getTabById
+    getTabById,
+    getAllTabs
 }
