@@ -26,3 +26,5 @@ app.use((req, res)=>{
     }
     res.status(statusCodes.NOT_FOUND).json(body);
 })
+
+module.exports = app;

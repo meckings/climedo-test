@@ -7,7 +7,7 @@ const createTab = (req, res)=>{
     tab.save()
         .then(result=>{
             console.log("Tab document saved!")
-            res.json(result);
+            res.status(statusCodes.CREATED).json(result);
         })
         .catch(err=>{
             const body = 
